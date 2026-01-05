@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b56afst0ayja2"]
+
+[ext_resource type="Texture2D" uid="uid://c07uq5gcc4yix" path="res://test/assets/textures/playerShip1_blue.png" id="1_8a8pi"]
+[ext_resource type="Script" uid="uid://bl6ymk0uwd1t6" path="res://test/character_body_2d.gd" id="1_syuel"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65205"]
+radius = 30.0
+height = 90.0
+
+[node name="Test" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+motion_mode = 1
+script = ExtResource("1_syuel")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_8a8pi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_65205")
+
+[node name="Camera2D" type="Camera2D" parent="."]
