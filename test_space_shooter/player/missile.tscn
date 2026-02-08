@@ -1,0 +1,101 @@
+[gd_scene load_steps=16 format=3 uid="uid://dwga0splhj70t"]
+
+[ext_resource type="Script" uid="uid://ljyelpyg0iis" path="res://test_space_shooter/player/missile.gd" id="1_y0gfy"]
+[ext_resource type="Texture2D" uid="uid://c637g2i6ahrbr" path="res://test_space_shooter/assets/textures/pickups/spaceMissiles_015.png" id="2_rsb5v"]
+[ext_resource type="Texture2D" uid="uid://cxbspq22p80t3" path="res://test_space_shooter/assets/textures/effects/star2.png" id="3_gbr6a"]
+[ext_resource type="AudioStream" uid="uid://bmjwm2yjal5el" path="res://test_space_shooter/assets/sound/Bazooka Blast Close 005.wav" id="4_rsb5v"]
+[ext_resource type="AudioStream" uid="uid://cwrcfpg0pcea1" path="res://test_space_shooter/assets/sound/Missile Trail Loop 001.wav" id="5_y0gfy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y0gfy"]
+radius = 6.0
+height = 25.0
+
+[sub_resource type="CurveTexture" id="CurveTexture_y0gfy"]
+
+[sub_resource type="Gradient" id="Gradient_gbr6a"]
+colors = PackedColorArray(1, 1, 0.30980393, 1, 1, 0.13333334, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qtwyk"]
+gradient = SubResource("Gradient_gbr6a")
+
+[sub_resource type="Gradient" id="Gradient_7ujmx"]
+colors = PackedColorArray(1, 1, 0.30980393, 1, 1, 0.20392157, 0.15294118, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5t6eu"]
+gradient = SubResource("Gradient_7ujmx")
+
+[sub_resource type="Curve" id="Curve_chyqf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y0t4a"]
+curve = SubResource("Curve_chyqf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3fehj"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 120.0
+angular_velocity_min = -180.00002
+angular_velocity_max = 179.99998
+radial_velocity_min = 4.9999776
+radial_velocity_max = 14.999977
+gravity = Vector3(0, 0, 0)
+damping_min = 30.000002
+damping_max = 30.000002
+scale_min = 0.5
+scale_max = 0.75
+scale_curve = SubResource("CurveTexture_y0t4a")
+color_ramp = SubResource("GradientTexture1D_5t6eu")
+color_initial_ramp = SubResource("GradientTexture1D_qtwyk")
+alpha_curve = SubResource("CurveTexture_y0gfy")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = -2.2351742e-08
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y0gfy"]
+radius = 40.0
+
+[node name="Missile" type="Area2D"]
+z_index = 1
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_y0gfy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = ExtResource("2_rsb5v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("CapsuleShape2D_y0gfy")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 20)
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+z_index = 1
+position = Vector2(0, -13)
+emitting = false
+amount = 120
+texture = ExtResource("3_gbr6a")
+lifetime = 3.0
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3fehj")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_rsb5v")
+
+[node name="Flying Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_y0gfy")
+autoplay = true
+max_distance = 500.0
+
+[node name="ExplosionCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_y0gfy")
+disabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

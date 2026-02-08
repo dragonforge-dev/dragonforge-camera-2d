@@ -45,6 +45,13 @@ func _enter_tree() -> void:
 	if tile_map_layer:
 		set_tile_map_layer_limit(tile_map_layer)
 
+func _exit_tree() -> void:
+	# Reset camera limits in case we are removing this node from the tree.
+	if camera is Camera2D:
+		camera.limit_top = -10000000
+		camera.limit_left = -10000000
+		camera.limit_bottom = 10000000
+		camera.limit_right = 10000000
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = []

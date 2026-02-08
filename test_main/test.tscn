@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvgfrrr61ahtn"]
+
+[ext_resource type="Texture2D" uid="uid://oryb8faahqj1" path="res://test_space_shooter/assets/textures/spaceShooter_vector.svg" id="1_4oorh"]
+[ext_resource type="FontFile" uid="uid://b2dqgcof6pk4n" path="res://assets/fonts/Kenney Space.ttf" id="1_jyrk8"]
+[ext_resource type="Script" uid="uid://dao1slkfpra60" path="res://test_main/button_switch_scene.gd" id="2_h7aav"]
+[ext_resource type="Script" uid="uid://btm63mpqix1yn" path="res://test_main/test.gd" id="2_jyrk8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uh7m"]
+atlas = ExtResource("1_4oorh")
+region = Rect2(1023, 349, 222, 39)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8uh7m"]
+texture = SubResource("AtlasTexture_8uh7m")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+modulate_color = Color(0.92535293, 0.9253529, 0.9253527, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6uqi0"]
+texture = SubResource("AtlasTexture_8uh7m")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_37kl0"]
+texture = SubResource("AtlasTexture_8uh7m")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+modulate_color = Color(0.830949, 0.99999994, 0.9981573, 1)
+
+[sub_resource type="Theme" id="Theme_ppyta"]
+Button/colors/font_color = Color(0.27058825, 0.7254902, 0.92156863, 1)
+Button/colors/font_disabled_color = Color(0.27058825, 0.7254902, 0.92156863, 0.3529412)
+Button/colors/font_focus_color = Color(0.27058825, 0.7254902, 0.92156863, 1)
+Button/colors/font_hover_color = Color(0.27058825, 0.7254902, 0.92156863, 1)
+Button/colors/font_pressed_color = Color(0.18235233, 0.64870155, 0.83869874, 1)
+Button/fonts/font = ExtResource("1_jyrk8")
+Button/styles/disabled = SubResource("StyleBoxTexture_8uh7m")
+Button/styles/hover = SubResource("StyleBoxTexture_6uqi0")
+Button/styles/normal = SubResource("StyleBoxTexture_8uh7m")
+Button/styles/pressed = SubResource("StyleBoxTexture_37kl0")
+
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ppyta")
+script = ExtResource("2_jyrk8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 129.0
+offset_bottom = 41.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Space Shooter" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Space Shooter
+"
+script = ExtResource("2_h7aav")
+test_scene = "uid://b56afst0ayja2"
+
+[node name="Platformer" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Platformer"
+script = ExtResource("2_h7aav")
+test_scene = "uid://dhtfcpqevtin1"

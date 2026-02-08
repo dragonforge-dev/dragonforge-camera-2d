@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dhtfcpqevtin1"]
+[gd_scene load_steps=31 format=4 uid="uid://dhtfcpqevtin1"]
 
 [ext_resource type="Script" uid="uid://bn10amn6x1lww" path="res://test_platformer/character_body_2d.gd" id="1_0lyw7"]
 [ext_resource type="Texture2D" uid="uid://bmeoo5lq3p4fs" path="res://test_platformer/assets/textures/player/p1_duck.png" id="1_khmlf"]
@@ -19,8 +19,12 @@
 [ext_resource type="Texture2D" uid="uid://dlvin0vdo0rxf" path="res://test_platformer/assets/textures/player/p1_walk/p1_walk10.png" id="15_4upib"]
 [ext_resource type="Texture2D" uid="uid://cnhmfmqs3k2md" path="res://test_platformer/assets/textures/player/p1_walk/p1_walk11.png" id="16_dyhds"]
 [ext_resource type="Texture2D" uid="uid://y0m2m7txqfxi" path="res://test_platformer/assets/textures/tiles_sheet.png" id="18_edmaa"]
-[ext_resource type="Script" uid="uid://c6isp3swx5c53" path="res://addons/dragonforge_camera_2d/camera_2d_limit.gd" id="19_vae0l"]
+[ext_resource type="Script" uid="uid://c3kp1j2jf8xw5" path="res://addons/dragonforge_camera_2d/camera_2d_pinch_zoom.gd" id="20_7ivef"]
 [ext_resource type="Script" uid="uid://dsly5ety6golv" path="res://addons/dragonforge_camera_2d/camera_2d_zoom.gd" id="20_c1onv"]
+[ext_resource type="Script" uid="uid://c6isp3swx5c53" path="res://addons/dragonforge_camera_2d/camera_2d_limit.gd" id="21_7ivef"]
+[ext_resource type="Script" uid="uid://17e3pstyr65d" path="res://addons/dragonforge_camera_2d/camera_2d_shake.gd" id="22_rg8iv"]
+[ext_resource type="Script" uid="uid://o4qfu7xthmjv" path="res://addons/dragonforge_camera_2d/camera_2d_pan.gd" id="23_e3n0w"]
+[ext_resource type="Script" uid="uid://3ihk7ka0ynai" path="res://test_platformer/water_hazard.gd" id="24_280au"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_khmlf"]
 radius = 33.0
@@ -315,7 +319,7 @@ texture_region_size = Vector2i(70, 70)
 4:9/0 = 0
 4:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, -11.853949, 31.115562, 6.4749146, 18.345589, 19.964325, -3.057602, 30.575989, -35, 35)
 5:9/0 = 0
-5:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -5.888481, -22.741726, -1.9289856, -10.558659, -2.0305138, 9.238823, -9.441875, 25.889015, -9.543404, 35, -6.193058, 35, 35, -35, 35)
+5:9/0/physics_layer_1/polygon_0/points = PackedVector2Array(-35, -5.9900055, -24.534561, -1.911789, -10.83345, -1.911789, 8.603027, -9.240295, 23.578674, -10.514816, 35, -6.193058, 35, 35, -35, 35)
 6:9/0 = 0
 6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 7:9/0 = 0
@@ -338,7 +342,7 @@ texture_region_size = Vector2i(70, 70)
 4:10/0 = 0
 4:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(35, -35, -35, -35, -35, -11.853949, -8.184872, 7.3381577, 11.007244, 35, 35, 35)
 5:10/0 = 0
-5:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -5.888481, -22.741726, -1.9289856, -10.558659, -2.0305138, 9.238823, -9.441875, 25.889015, -9.543404, 35, -6.193058, 35, 35, -35, 35)
+5:10/0/physics_layer_1/polygon_0/points = PackedVector2Array(-35, -5.9900055, -24.534561, -1.911789, -10.83345, -1.911789, 8.603027, -9.240295, 23.578674, -10.514816, 35, -6.193058, 35, 35, -35, 35)
 6:10/0 = 0
 6:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 7:10/0 = 0
@@ -361,7 +365,7 @@ texture_region_size = Vector2i(70, 70)
 4:11/0 = 0
 4:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(35, -35, -35, -35, -35, -11.853949, -31.115562, 6.4749146, -18.345589, 19.964325, 3.057602, 30.575989, 35, 35)
 5:11/0 = 0
-5:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
+5:11/0/physics_layer_1/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 6:11/0 = 0
 6:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 7:11/0 = 0
@@ -400,7 +404,12 @@ texture_region_size = Vector2i(70, 70)
 [sub_resource type="TileSet" id="TileSet_ugneh"]
 tile_size = Vector2i(70, 70)
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 4
+physics_layer_1/collision_mask = 4
 sources/1 = SubResource("TileSetAtlasSource_ugneh")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rg8iv"]
+size = Vector2(350, 35)
 
 [node name="Platformer Test" type="Node2D"]
 
@@ -412,6 +421,7 @@ repeat_times = 15
 texture = ExtResource("1_ugneh")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 3
 floor_snap_length = 10.0
 script = ExtResource("1_0lyw7")
 
@@ -421,26 +431,55 @@ shape = SubResource("CapsuleShape2D_khmlf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_tiasu")
-animation = &"walk"
+animation = &"hurt"
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 limit_left = -700
 limit_top = -700
 limit_right = 1050
 limit_bottom = 350
-
-[node name="Camera2DLimit" type="Node" parent="CharacterBody2D/Camera2D" node_paths=PackedStringArray("tile_map_layer")]
-script = ExtResource("19_vae0l")
-tile_map_layer = NodePath("../../../TileMapLayer")
-metadata/_custom_type_script = "uid://c6isp3swx5c53"
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_left_margin = 0.1
+drag_right_margin = 0.1
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="Camera2DZoom" type="Node" parent="CharacterBody2D/Camera2D"]
 script = ExtResource("20_c1onv")
-zoom_in_max = 1.0
-zoom_out_max = 3.0
-zoom_step = 0.1
 metadata/_custom_type_script = "uid://dsly5ety6golv"
 
+[node name="Camera2DPinchZoom" type="Node" parent="CharacterBody2D/Camera2D"]
+script = ExtResource("20_7ivef")
+metadata/_custom_type_script = "uid://c3kp1j2jf8xw5"
+
+[node name="Camera2DLimit" type="Node" parent="CharacterBody2D/Camera2D" node_paths=PackedStringArray("tile_map_layer")]
+script = ExtResource("21_7ivef")
+tile_map_layer = NodePath("../../../TileMapLayer")
+metadata/_custom_type_script = "uid://c6isp3swx5c53"
+
+[node name="Camera2DShake" type="Node" parent="CharacterBody2D/Camera2D"]
+script = ExtResource("22_rg8iv")
+interval = 1.0
+metadata/_custom_type_script = "uid://17e3pstyr65d"
+
+[node name="Camera2DPan" type="Node" parent="CharacterBody2D/Camera2D"]
+script = ExtResource("23_e3n0w")
+metadata/_custom_type_script = "uid://o4qfu7xthmjv"
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD+/wEAAQAGAAkAAAD//wEAAQAGAAkAAAAAAAEAAQAGAAkAAAABAAEAAQAGAAgAAAD9/wEAAQAGAAkAAAADAP//AQAGAAkAAAAEAP//AQAHAAkAAAACAP//AQAHAAsAAAD9/wAAAQAGAAYAAAD7////AQAHAAcAAAD5//7/AQAHAAcAAAAGAPz/AQAHAAMAAAAHAPz/AQAHAAIAAAAIAPz/AQAIAAAAAAAHAPv/AQAHAAMAAAAIAPr/AQAHAAMAAAAJAPz/AQAIAAAAAAAFAP3/AQAJAAEAAAAIAPv/AQAHAAIAAAAJAPr/AQAGAAkAAAALAPr/AQAGAAgAAAAKAPr/AQAGAAkAAAAJAPv/AQAIAAAAAAAKAPv/AQAIAAAAAAAKAPz/AQAIAAAAAAD2/wQAAQAGAAoAAAD3/wQAAQAGAAkAAAD4/wQAAQAGAAkAAAD5/wQAAQAGAAkAAAD6/wQAAQAGAAgAAAD7/wQAAQAGAAoAAAD8/wQAAQAGAAkAAAD9/wQAAQAGAAkAAAD+/wQAAQAGAAkAAAD//wQAAQAGAAgAAAAAAAQAAQAGAAoAAAABAAQAAQAGAAkAAAACAAQAAQAGAAkAAAADAAQAAQAGAAkAAAAEAAQAAQAGAAgAAAAFAAQAAQAGAAoAAAAGAAQAAQAGAAkAAAAHAAQAAQAGAAkAAAAIAAQAAQAGAAkAAAAJAAQAAQAGAAgAAAAKAAQAAQAGAAoAAAALAAQAAQAGAAkAAAAMAAQAAQAGAAkAAAANAAQAAQAGAAkAAAAOAAQAAQAGAAgAAAD2/wMAAQAJAAIAAAD2/wIAAQAJAAIAAAD2/wEAAQAJAAIAAAD2/wAAAQAJAAIAAAD2////AQAJAAIAAAD2//7/AQAJAAIAAAD2//3/AQAJAAIAAAD2//z/AQAJAAIAAAD2//v/AQAJAAIAAAD2//r/AQAJAAIAAAD2//n/AQAJAAIAAAAOAAMAAQAJAAIAAAAOAAIAAQAJAAIAAAAOAAEAAQAJAAIAAAAOAAAAAQAJAAIAAAAOAP//AQAJAAIAAAAOAP7/AQAJAAIAAAAOAP3/AQAJAAIAAAAOAPz/AQAJAAIAAAAOAPv/AQAJAAIAAAAOAPr/AQAJAAIAAAAOAPn/AQAJAAIAAAAOAPj/AQAJAAIAAAAOAPf/AQAJAAIAAAAOAPb/AQAJAAIAAAD2//b/AQAJAAIAAAD2//f/AQAJAAIAAAD2//j/AQAJAAIAAAD3//b/AQAHAAYAAAD4//b/AQAHAAYAAAD5//b/AQAHAAYAAAD6//b/AQAHAAYAAAD7//b/AQAHAAYAAAD8//b/AQAHAAYAAAD9//b/AQAHAAYAAAD+//b/AQAHAAYAAAD///b/AQAHAAYAAAAAAPb/AQAHAAYAAAABAPb/AQAHAAYAAAACAPb/AQAHAAYAAAADAPb/AQAHAAYAAAAEAPb/AQAHAAYAAAAFAPb/AQAHAAYAAAAGAPb/AQAHAAYAAAAHAPb/AQAHAAYAAAAIAPb/AQAHAAYAAAAJAPb/AQAHAAYAAAAKAPb/AQAHAAYAAAALAPb/AQAHAAYAAAAMAPb/AQAHAAYAAAANAPb/AQAHAAYAAAD8/wEAAQAHAAoAAAD6/wIAAQAHAAcAAAD4/wMAAQAGAAYAAAABAAAAAQAGAAYAAAD8//3/AQAHAAcAAAD9//z/AQAIAAEAAAD+//v/AQAIAAEAAAA=")
+tile_map_data = PackedByteArray("AAD+/wEAAQAGAAkAAAD//wEAAQAGAAkAAAAAAAEAAQAGAAkAAAABAAEAAQAGAAgAAAD9/wEAAQAGAAkAAAADAP//AQAGAAkAAAAEAP//AQAHAAkAAAACAP//AQAHAAsAAAD9/wAAAQAGAAYAAAD7////AQAHAAcAAAD5//7/AQAHAAcAAAAGAPz/AQAHAAMAAAAHAPz/AQAHAAIAAAAIAPz/AQAIAAAAAAAHAPv/AQAHAAMAAAAIAPr/AQAHAAMAAAAJAPz/AQAIAAAAAAAIAPv/AQAHAAIAAAAJAPr/AQAGAAkAAAALAPr/AQAGAAgAAAAKAPr/AQAGAAkAAAAJAPv/AQAIAAAAAAAKAPv/AQAIAAAAAAAKAPz/AQAIAAAAAAD2/wQAAQAGAAoAAAD3/wQAAQAGAAkAAAD4/wQAAQAGAAkAAAD5/wQAAQAGAAkAAAD6/wQAAQAGAAgAAAD7/wQAAQAGAAoAAAD8/wQAAQAGAAkAAAD9/wQAAQAGAAkAAAD+/wQAAQAGAAkAAAD//wQAAQAGAAgAAAAAAAQAAQAGAAoAAAABAAQAAQAGAAkAAAACAAQAAQAGAAkAAAADAAQAAQAGAAkAAAAEAAQAAQAGAAgAAAAFAAQAAQAGAAoAAAAGAAQAAQAGAAkAAAAHAAQAAQAGAAkAAAAIAAQAAQAGAAkAAAAJAAQAAQAGAAgAAAAKAAQAAQAGAAoAAAALAAQAAQAGAAkAAAAMAAQAAQAGAAkAAAANAAQAAQAGAAkAAAAOAAQAAQAGAAgAAAD2/wMAAQAJAAIAAAD2/wIAAQAJAAIAAAD2/wEAAQAJAAIAAAD2/wAAAQAJAAIAAAD2////AQAJAAIAAAD2//7/AQAJAAIAAAD2//3/AQAJAAIAAAD2//z/AQAJAAIAAAD2//v/AQAJAAIAAAD2//r/AQAJAAIAAAD2//n/AQAJAAIAAAAOAAMAAQAJAAIAAAAOAAIAAQAJAAIAAAAOAAEAAQAJAAIAAAAOAAAAAQAJAAIAAAAOAP//AQAJAAIAAAAOAP7/AQAJAAIAAAAOAP3/AQAJAAIAAAAOAPz/AQAJAAIAAAAOAPv/AQAJAAIAAAAOAPr/AQAJAAIAAAAOAPn/AQAJAAIAAAAOAPj/AQAJAAIAAAAOAPf/AQAJAAIAAAAOAPb/AQAJAAIAAAD2//b/AQAJAAIAAAD2//f/AQAJAAIAAAD2//j/AQAJAAIAAAD3//b/AQAHAAYAAAD4//b/AQAHAAYAAAD5//b/AQAHAAYAAAD6//b/AQAHAAYAAAD7//b/AQAHAAYAAAD8//b/AQAHAAYAAAD9//b/AQAHAAYAAAD+//b/AQAHAAYAAAD///b/AQAHAAYAAAAAAPb/AQAHAAYAAAABAPb/AQAHAAYAAAACAPb/AQAHAAYAAAADAPb/AQAHAAYAAAAEAPb/AQAHAAYAAAAFAPb/AQAHAAYAAAAGAPb/AQAHAAYAAAAHAPb/AQAHAAYAAAAIAPb/AQAHAAYAAAAJAPb/AQAHAAYAAAAKAPb/AQAHAAYAAAALAPb/AQAHAAYAAAAMAPb/AQAHAAYAAAANAPb/AQAHAAYAAAD8/wEAAQAHAAoAAAD6/wIAAQAHAAcAAAD4/wMAAQAGAAYAAAABAAAAAQAGAAYAAAD8//3/AQAHAAcAAAD9//z/AQAIAAEAAAD+//v/AQAIAAEAAAAHAAMAAQAFAAoAAAAIAAMAAQAFAAoAAAAJAAMAAQAFAAoAAAAEAAMAAQAIAAEAAAAKAAMAAQAIAAEAAAAAAP3/AQAJAAEAAAACAPz/AQAJAAEAAAAEAPv/AQAJAAEAAAD9/wIAAQAIAAAAAAD+/wIAAQAIAAAAAAD//wIAAQAIAAAAAAAAAAIAAQAIAAAAAAAGAAMAAQAFAAoAAAAFAAMAAQAFAAoAAAA=")
 tile_set = SubResource("TileSet_ugneh")
+
+[node name="WaterHazard" type="Area2D" parent="."]
+position = Vector2(525, 261)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("24_280au")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterHazard"]
+shape = SubResource("RectangleShape2D_rg8iv")
+debug_color = Color(0.98039216, 0, 0, 0.41960785)
+
+[connection signal="body_entered" from="WaterHazard" to="WaterHazard" method="_on_body_entered"]
+[connection signal="body_exited" from="WaterHazard" to="WaterHazard" method="_on_body_exited"]

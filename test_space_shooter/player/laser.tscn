@@ -1,0 +1,86 @@
+[gd_scene load_steps=14 format=3 uid="uid://i04oibb7srfk"]
+
+[ext_resource type="Script" uid="uid://dvro6xskf60v6" path="res://test_space_shooter/player/laser.gd" id="1_tvgf7"]
+[ext_resource type="Texture2D" uid="uid://ccbehmndxi7ns" path="res://test_space_shooter/assets/textures/lasers/laserRed01.png" id="1_xxbk3"]
+[ext_resource type="Texture2D" uid="uid://cxbspq22p80t3" path="res://test_space_shooter/assets/textures/effects/star2.png" id="3_bblti"]
+[ext_resource type="AudioStream" uid="uid://cs5ubv4jx10ap" path="res://test_space_shooter/assets/sound/explosionCrunch_000.ogg" id="4_lxuxq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tvgf7"]
+radius = 2.0
+height = 40.0
+
+[sub_resource type="CurveTexture" id="CurveTexture_lxuxq"]
+
+[sub_resource type="Gradient" id="Gradient_lxuxq"]
+colors = PackedColorArray(1, 1, 0.30980393, 1, 1, 0.13333334, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_26tdv"]
+gradient = SubResource("Gradient_lxuxq")
+
+[sub_resource type="Gradient" id="Gradient_kl47l"]
+colors = PackedColorArray(1, 1, 0.30980393, 1, 1, 0.20392157, 0.15294118, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kl47l"]
+gradient = SubResource("Gradient_kl47l")
+
+[sub_resource type="Curve" id="Curve_s0b3e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3xvsl"]
+curve = SubResource("Curve_s0b3e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lxuxq"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+angular_velocity_min = -180.00002
+angular_velocity_max = 179.99998
+radial_velocity_min = 4.9999776
+radial_velocity_max = 14.999977
+gravity = Vector3(0, 0, 0)
+damping_min = 30.000002
+damping_max = 30.000002
+scale_min = 0.5
+scale_max = 0.75
+scale_curve = SubResource("CurveTexture_3xvsl")
+color_ramp = SubResource("GradientTexture1D_kl47l")
+color_initial_ramp = SubResource("GradientTexture1D_26tdv")
+alpha_curve = SubResource("CurveTexture_lxuxq")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = -2.2351742e-08
+
+[node name="Laser" type="Area2D"]
+z_index = 1
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_tvgf7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -27)
+texture = ExtResource("1_xxbk3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -31)
+shape = SubResource("CapsuleShape2D_tvgf7")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 20)
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+z_index = 1
+position = Vector2(0, -31)
+emitting = false
+amount = 40
+texture = ExtResource("3_bblti")
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lxuxq")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_lxuxq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

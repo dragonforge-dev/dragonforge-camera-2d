@@ -1,0 +1,193 @@
+[gd_scene load_steps=25 format=3 uid="uid://ojufbn7ryfl8"]
+
+[ext_resource type="Script" uid="uid://bl6ymk0uwd1t6" path="res://test_space_shooter/player/player.gd" id="1_14sqo"]
+[ext_resource type="Texture2D" uid="uid://c6y763kynv6xg" path="res://test_space_shooter/assets/textures/effects/shield1.png" id="2_g6vla"]
+[ext_resource type="Texture2D" uid="uid://c8hbvh4lhh0uv" path="res://test_space_shooter/assets/textures/effects/fire03.png" id="2_u3ua4"]
+[ext_resource type="Texture2D" uid="uid://cxxb2ic4a5x25" path="res://test_space_shooter/assets/textures/effects/fire06.png" id="3_xhf4m"]
+[ext_resource type="Texture2D" uid="uid://clag61kweniyc" path="res://test_space_shooter/assets/textures/effects/fire07.png" id="4_wvn0b"]
+[ext_resource type="Texture2D" uid="uid://c07uq5gcc4yix" path="res://test_space_shooter/assets/textures/playerShip1_blue.png" id="5_q81nm"]
+[ext_resource type="AudioStream" uid="uid://dwqfqcfi1xmya" path="res://test_space_shooter/assets/sound/thrusterFire_000.ogg" id="6_2v2lw"]
+[ext_resource type="AudioStream" uid="uid://b1nsm8gvalmfi" path="res://test_space_shooter/assets/sound/laserSmall_001.ogg" id="7_0dqur"]
+[ext_resource type="AudioStream" uid="uid://4xont0t1b7ec" path="res://test_space_shooter/assets/sound/forceField_000.ogg" id="7_ffw6q"]
+[ext_resource type="Texture2D" uid="uid://diyam23g1nbtm" path="res://test_space_shooter/assets/textures/effects/smoke_01.png" id="8_u3ua4"]
+[ext_resource type="Texture2D" uid="uid://cppvqmfbjd65r" path="res://test_space_shooter/assets/textures/ui/glassPanel_cornerBR.png" id="9_xhf4m"]
+[ext_resource type="FontFile" uid="uid://dwk7ia1l0b4nu" path="res://assets/fonts/Kenney Future.ttf" id="10_0dqur"]
+[ext_resource type="Texture2D" uid="uid://bax0sexsma2ri" path="res://test_space_shooter/assets/textures/ui/squareBlue.png" id="10_wvn0b"]
+[ext_resource type="Script" uid="uid://dmqodd3ieejmc" path="res://test_space_shooter/player/shield_hud.gd" id="12_0vlsu"]
+[ext_resource type="Texture2D" uid="uid://bcnfpy0s5vhq8" path="res://test_space_shooter/assets/textures/ui/squareWhite.png" id="12_g6vla"]
+[ext_resource type="Texture2D" uid="uid://d0u3ff5f86h2m" path="res://test_space_shooter/assets/textures/ui/square_shadow.png" id="13_ffw6q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_baagg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u3ua4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xhf4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wvn0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xhf4m")
+}],
+"loop": true,
+"name": &"thrust",
+"speed": 12.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_u3ua4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xhf4m"]
+gradient = SubResource("Gradient_u3ua4")
+
+[sub_resource type="Curve" id="Curve_wvn0b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q81nm"]
+curve = SubResource("Curve_wvn0b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xhf4m"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 75.0
+gravity = Vector3(0, 98, 0)
+damping_max = 38.235
+scale_min = 0.02
+scale_max = 0.07
+scale_curve = SubResource("CurveTexture_q81nm")
+color_ramp = SubResource("GradientTexture1D_xhf4m")
+turbulence_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wvn0b"]
+texture = ExtResource("9_xhf4m")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 15.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_0vlsu"]
+font = ExtResource("10_0dqur")
+font_size = 20
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+motion_mode = 1
+script = ExtResource("1_14sqo")
+max_health = 150.0
+
+[node name="Shield" type="Sprite2D" parent="."]
+modulate = Color(0.21176471, 0.73333335, 0.9607843, 0)
+texture = ExtResource("2_g6vla")
+
+[node name="Thrusters" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 53)
+sprite_frames = SubResource("SpriteFrames_baagg")
+animation = &"thrust"
+autoplay = "thrust"
+frame_progress = 0.69806427
+
+[node name="Ship" type="Sprite2D" parent="."]
+texture = ExtResource("5_q81nm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-49, -6, -37, 1, -12, -12, -8, -37, 7, -37, 11, -12, 35, 2, 49, -6, 45, 24, 13, 27, 7, 37, -7, 37, -14, 26, -46, 24)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Shield Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ffw6q")
+
+[node name="Thruster Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_2v2lw")
+autoplay = true
+
+[node name="Fire Laser Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_0dqur")
+
+[node name="Gun Port" type="Marker2D" parent="."]
+position = Vector2(0, -37)
+
+[node name="Smoke" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(0, 44)
+amount = 30
+texture = ExtResource("8_u3ua4")
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_xhf4m")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Shield HUD" type="PanelContainer" parent="HUD/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_wvn0b")
+script = ExtResource("12_0vlsu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/Shield HUD"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/MarginContainer/Shield HUD/HBoxContainer"]
+layout_mode = 2
+text = "Shields"
+label_settings = SubResource("LabelSettings_0vlsu")
+
+[node name="Shield Display" type="HBoxContainer" parent="HUD/MarginContainer/Shield HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="Shield" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("10_wvn0b")
+
+[node name="Shield2" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("10_wvn0b")
+
+[node name="Shield3" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("10_wvn0b")
+
+[node name="Shield4" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("10_wvn0b")
+
+[node name="Shield5" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("10_wvn0b")
+
+[node name="Shield6" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("10_wvn0b")
+
+[node name="Shield7" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("10_wvn0b")
+
+[node name="Shield8" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("10_wvn0b")
+
+[node name="Shield9" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("12_g6vla")
+
+[node name="Shield10" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+layout_mode = 2
+texture = ExtResource("13_ffw6q")

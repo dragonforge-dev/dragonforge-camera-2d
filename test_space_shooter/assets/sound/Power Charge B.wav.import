@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cray3eifn6qhe"
+path="res://.godot/imported/Power Charge B.wav-5bfcac43592d7927711b4c432b54fb82.sample"
+
+[deps]
+
+source_file="res://test_space_shooter/assets/sound/Power Charge B.wav"
+dest_files=["res://.godot/imported/Power Charge B.wav-5bfcac43592d7927711b4c432b54fb82.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

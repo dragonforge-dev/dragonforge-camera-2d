@@ -1,23 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://b56afst0ayja2"]
+[gd_scene load_steps=6 format=3 uid="uid://b56afst0ayja2"]
 
-[ext_resource type="Texture2D" uid="uid://c07uq5gcc4yix" path="res://test_space_shooter/assets/textures/playerShip1_blue.png" id="1_8a8pi"]
-[ext_resource type="Script" uid="uid://bl6ymk0uwd1t6" path="res://test_space_shooter/character_body_2d.gd" id="1_syuel"]
+[ext_resource type="Shader" uid="uid://byndinykwiyw3" path="res://test_space_shooter/assets/shaders/starfield.gdshader" id="1_xjsxi"]
+[ext_resource type="PackedScene" uid="uid://ojufbn7ryfl8" path="res://test_space_shooter/player/player.tscn" id="2_baqba"]
+[ext_resource type="Texture2D" uid="uid://dr3er3win60rs" path="res://test_space_shooter/assets/textures/background/purple.png" id="3_baqba"]
+[ext_resource type="PackedScene" uid="uid://b70lx0bpxs2oi" path="res://test_space_shooter/asteroids/asteroid.tscn" id="9_f8b4c"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65205"]
-radius = 30.0
-height = 90.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vhogm"]
+shader = ExtResource("1_xjsxi")
+shader_parameter/anim_speed = -0.7499997981249997
+shader_parameter/star_brightness = 0.0250000011875
+shader_parameter/dust = 0.05600000266
+shader_parameter/dist_fade = 0.35
+shader_parameter/pixelation = 250.0000095
+shader_parameter/quantization_levels = 256
+shader_parameter/dust_color = Color(0, 1.0415826, 2.0823529, 1)
+shader_parameter/saturation = 1.0
+shader_parameter/layers = 7.0
+shader_parameter/iterations = 8
 
 [node name="Space Shooter Test" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-motion_mode = 1
-script = ExtResource("1_syuel")
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(256, 256)
+repeat_times = 20
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("1_8a8pi")
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+material = SubResource("ShaderMaterial_vhogm")
+texture = ExtResource("3_baqba")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_65205")
+[node name="Player" parent="." node_paths=PackedStringArray("background") instance=ExtResource("2_baqba")]
+background = NodePath("../Parallax2D/Sprite2D")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Asteroid" parent="." instance=ExtResource("9_f8b4c")]
+position = Vector2(-245, -212)
+
+[node name="Asteroid2" parent="." instance=ExtResource("9_f8b4c")]
+position = Vector2(413, -260)
+
+[node name="Asteroid3" parent="." instance=ExtResource("9_f8b4c")]
+position = Vector2(-344, 207)
+
+[node name="Asteroid4" parent="." instance=ExtResource("9_f8b4c")]
+position = Vector2(352, 195)

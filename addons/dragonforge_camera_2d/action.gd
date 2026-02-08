@@ -24,6 +24,7 @@ class_name Action extends Object
 ##	Action.add(JUMP, Action.joy_button(JOY_BUTTON_A), Action.mouse_button(MOUSE_BUTTON_RIGHT), Action.key(KEY_SPACE))
 ##	Action.add(FIRE, Action.joy_axis(JOY_AXIS_TRIGGER_RIGHT), Action.mouse_button(MOUSE_BUTTON_LEFT), Action.key(KEY_CTRL))
 ##	print_rich("[color=yellow][b]WARNING[/b][/color]: Project must be reloaded for InputMap changes to appear. [color=ivory][b]Project -> Reload Current Project[/b][/color]")
+##	EditorInterface.restart_editor()
 ##
 ##
 ## func _disable_plugin() -> void:
@@ -34,6 +35,7 @@ class_name Action extends Object
 ##	Action.remove(JUMP)
 ##	Action.remove(FIRE)
 ##	print_rich("[color=yellow][b]WARNING[/b][/color]: Project must be reloaded for InputMap changes to appear. [color=ivory][b]Project -> Reload Current Project[/b][/color]")
+##	EditorInterface.restart_editor()
 ## [/codeblock]
 
 const AXIS_UP = -1
@@ -106,10 +108,14 @@ static func add(action: StringName, ...events: Array) -> void:
 		"events": []
 	}
 	
+	InputMap.add_action(action)
+	
 	for event in events:
 		if event is float:
 			input_map["deadzone"] = event
+			InputMap.action_set_deadzone(action, event)
 		elif event is InputEvent:
+			InputMap.action_add_event(action, event)
 			input_map["events"].append(event)
 	
 	ProjectSettings.set_setting("input/" + action, input_map)
@@ -124,5 +130,6 @@ static func add(action: StringName, ...events: Array) -> void:
 ## Action.remove(MOVE_UP)
 ## [/codeblock]
 static func remove(action: StringName) -> void:
+	InputMap.erase_action(action)
 	ProjectSettings.set_setting("input/" + action, null)
 	ProjectSettings.save()

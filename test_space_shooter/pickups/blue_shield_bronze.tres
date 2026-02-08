@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=5 format=3 uid="uid://bi7ifuy2m4h6o"]
+
+[ext_resource type="Texture2D" uid="uid://b8rsbx156jb6x" path="res://test_space_shooter/assets/textures/pickups/powerupBlue.png" id="1_ejanv"]
+[ext_resource type="Script" uid="uid://cbw0yg4hvu25y" path="res://test_space_shooter/assets/textures/pickups/power_up.gd" id="3_mqsyx"]
+[ext_resource type="Texture2D" uid="uid://bokfiryn2vgx6" path="res://test_space_shooter/assets/textures/ui/pill_blue.png" id="3_ulj4f"]
+[ext_resource type="Texture2D" uid="uid://nbi01urwehvj" path="res://test_space_shooter/assets/textures/pickups/shield_bronze.png" id="4_ejanv"]
+
+[resource]
+script = ExtResource("3_mqsyx")
+color = Color(0.8784314, 0.5137255, 0.16470589, 1)
+base_sprite = ExtResource("1_ejanv")
+secondary_sprite = ExtResource("4_ejanv")
+radar_icon = ExtResource("3_ulj4f")
+metadata/_custom_type_script = "uid://cbw0yg4hvu25y"

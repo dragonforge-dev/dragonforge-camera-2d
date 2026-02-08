@@ -1,0 +1,76 @@
+[gd_scene load_steps=18 format=3 uid="uid://dl2yrmvhuvfi4"]
+
+[ext_resource type="Script" uid="uid://0c70q2w0glhs" path="res://test_space_shooter/pickups/pickup.gd" id="1_gaybj"]
+[ext_resource type="Resource" uid="uid://bi7ifuy2m4h6o" path="res://test_space_shooter/pickups/blue_shield_bronze.tres" id="2_bqgvx"]
+[ext_resource type="Texture2D" uid="uid://b8rsbx156jb6x" path="res://test_space_shooter/assets/textures/pickups/powerupBlue.png" id="2_vsbog"]
+[ext_resource type="AudioStream" uid="uid://dhmp5ydrk68yy" path="res://test_space_shooter/assets/sound/powerUp5.ogg" id="3_c3nhe"]
+[ext_resource type="Texture2D" uid="uid://da45nanigf612" path="res://test_space_shooter/assets/textures/pickups/shield_silver.png" id="3_nhlh1"]
+[ext_resource type="Script" uid="uid://cbw0yg4hvu25y" path="res://test_space_shooter/assets/textures/pickups/power_up.gd" id="4_nhlh1"]
+[ext_resource type="Resource" uid="uid://4urq2y163tkk" path="res://test_space_shooter/pickups/blue_shield_gold.tres" id="4_ugifq"]
+[ext_resource type="Material" uid="uid://b3xph5o4oenl0" path="res://test_space_shooter/assets/materials/pickup_shine.material" id="5_ghnns"]
+[ext_resource type="Resource" uid="uid://bqrhsc7wqqvk6" path="res://test_space_shooter/pickups/blue_shield_silver.tres" id="5_nw1sb"]
+[ext_resource type="Texture2D" path="res://test_space_shooter/assets/textures/effects/star3.png" id="6_3x5h8"]
+[ext_resource type="Resource" uid="uid://cyrn3hs8i4f5a" path="res://test_space_shooter/pickups/dumb_missile.tres" id="6_8c23u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gaybj"]
+radius = 15.0
+
+[sub_resource type="Gradient" id="Gradient_bqgvx"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yjbj4"]
+gradient = SubResource("Gradient_bqgvx")
+
+[sub_resource type="Curve" id="Curve_ghnns"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.564047, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mosb1"]
+curve = SubResource("Curve_ghnns")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ugifq"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.75
+scale_curve = SubResource("CurveTexture_mosb1")
+color_ramp = SubResource("GradientTexture1D_yjbj4")
+
+[node name="Pickup" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_gaybj")
+power_ups = Array[ExtResource("4_nhlh1")]([ExtResource("2_bqgvx"), ExtResource("4_ugifq"), ExtResource("5_nw1sb"), ExtResource("6_8c23u")])
+power_up = ExtResource("2_bqgvx")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = ExtResource("5_ghnns")
+
+[node name="Base Sprite" type="Sprite2D" parent="CanvasGroup"]
+unique_name_in_owner = true
+texture = ExtResource("2_vsbog")
+
+[node name="Secondary Sprite" type="Sprite2D" parent="CanvasGroup/Base Sprite"]
+unique_name_in_owner = true
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_nhlh1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_gaybj")
+debug_color = Color(0.99716014, 0.16596195, 0.99999994, 0.41960785)
+
+[node name="Pickup Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_c3nhe")
+
+[node name="Collection Effect" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 25
+texture = ExtResource("6_3x5h8")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ugifq")
