@@ -1,113 +1,145 @@
-[![Static Badge](https://img.shields.io/badge/Godot%20Engine-4.5.stable-blue?style=plastic&logo=godotengine)](https://godotengine.org/)
+[![Static Badge](https://img.shields.io/badge/Godot%20Engine-4.6.stable-blue?style=plastic&logo=godotengine)](https://godotengine.org/)
 [![License](https://img.shields.io/github/license/dragonforge-dev/dragonforge-camera-3d?logo=mit)](https://github.com/dragonforge-dev/dragonforge-camera-3d/blob/main/LICENSE)
 [![GitHub release badge](https://badgen.net/github/release/dragonforge-dev/dragonforge-camera-3d/latest)](https://github.com/dragonforge-dev/dragonforge-camera-3d/releases/latest)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dragonforge-dev/dragonforge-camera-3d)](https://img.shields.io/github/languages/code-size/dragonforge-dev/dragonforge-camera-3d)
 
-
 # Dragonforge Camera 2D <img src="/assets/textures/icons/readme_icon.svg" width="32" alt="Camera 2D Project Icon"/>
 Godot Camera2D components to add basic features to cameras.
+- **Camera2DLimit** - Limit the **Camera2D** to the boundaries of a **TileMapLayer**'s used tiles or a **Rect2i**.
+- **Camera2DZoom** - Allow a player to zoom a **Camera2D** using the mouse, keyboard, or controller.
+- **Camera2DShake** - Shakes a **Camera2D** (and optionally a controller) when directed.
+- **Camera2DPan** - Allow a player to pan a **Camera2D** using the mouse, keyboard, controller, or touch screen.
+- **Camera2DPinchZoom** - Allow a player to zoom a **Camera2D** using pinch zoom on a touch screen.
 
 # Version 0.1
-For use with **Godot 4.5.stable** and later.
+For use with **Godot 4.6.stable** and later.
 
-## Dependencies
-The following dependencies are included in the addons folder and are required for the template to function.
-- [Dragonforge Controller 0.12.1](https://github.com/dragonforge-dev/dragonforge-controller)
 # Installation Instructions
-1. Copy the `dragonforge_controller` folder from the `addons` folder into your project's `addons` folder.
-2. Ignore the following errors (they are appearing because the component is not yet enabled):
-  * ERROR: res://addons/dragonforge_controller/controller.gd:54 - Parse Error: Identifier "Keyboard" not declared in the current scope.
-  * ERROR: res://addons/dragonforge_controller/controller.gd:56 - Parse Error: Identifier "Mouse" not declared in the current scope.
-  * ERROR: res://addons/dragonforge_controller/controller.gd:59 - Parse Error: Identifier "Gamepad" not declared in the current scope.
-  * ERROR: modules/gdscript/gdscript.cpp:3022 - Failed to load script "res://addons/dragonforge_controller/controller.gd" with error "Parse error".
-11. Copy the `dragonforge_camera` folder from the `addons` folder into your project's `addons` folder.
+1. Copy the `dragonforge_camera_2d` folder from the `addons` folder into your project's `addons` folder.
+2. Ignore any errors (they are appearing because the component is not yet enabled.)
 3. In your project go to **Project -> Project Settings...**
 4. Select the **Plugins** tab.
-5. Check the **On checkbox** under **Enabled** for **Dragonforge Controller**
-5. Check the **On checkbox** under **Enabled** for **Dragonforge Camera 3D**
-10. Press the **Close** button.
-11. Save your project.
-12. In your project go to **Project -> Reload Current Project**.
-13. Wait for the project to reload.
+5. Check the **On checkbox** under **Enabled** for **Dragonforge Camera 2D**
+6. Press the **Close** button.
+7. Save your project.
+8. In your project go to **Project -> Reload Current Project**.
+9. Wait for the project to reload.
 
-**NOTE:** It's important to reload the project after running the plugin because it creates the `change_camera` action. Once you reboot, you can edit this action as you wish, but disabling and re-enabling this plugin will reset them because disabling the plugin will remove the action.
+**NOTE:** It's important to reload the project after running the plugin because it creates multiple camera actions for zooming and panning. Once you reboot, you can edit this action as you wish, but disabling and re-enabling this plugin will reset them because disabling the plugin will remove the action.
 
 # Usage Instructions
-1. On your **CharacterBody3D** node click **+ Add Child Node...** and select a **Cameras** node.
-2. On your **Cameras** node click **+ Add Child Node...** and add as many **Camera3D** nodes as you like. Configure them however you like. The player will be able to rotate through them at will.
-## First-Person View Camera
-1. If you haven't already, on your **CharacterBody3D** node click **+ Add Child Node...** and select a **Cameras** node.
-2. On your **Cameras** node click **+ Add Child Node...** and add a **CameraMount3D** node.
-3. Change the **Upwards Rotation Limit** to **-15**.
-4. Change the **Downwards Rotation Limit** to **40**.
-5. Check the **First Person** box.
-6. Add the following code to your **CharacterBody3D**:
-
-```
-class_name Player extends Character
-
-
-## Your character model
-@export var rig: Node3D
-## The speed at which the player turns.
-@export var turn_speed: float = 20.0
-##
-@export var speed = 5.0
-
-
-#A reference to your Cameras object
-@onready var cameras: Cameras = $Cameras
-
-
-var direction := Vector3.ZERO
-
-
-func _physics_process(delta: float) -> void:
-	direction = get_input_direction()
-	
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed
-	
-	if velocity.length() > 1.0 and direction != Vector3.ZERO:
-		look_toward_direction(delta)
-	
-	move_and_slide()
-	
-
-func get_input_direction() -> Vector3:
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var input_vector := Vector3(input_dir.x, 0, input_dir.y).normalized()
-	return cameras.get_facing(input_vector, character.transform.basis)
-
-
-func look_toward_direction(delta: float) -> void:
-	var target := rig.global_transform.looking_at(rig.global_position + direction, Vector3.UP)
-	rig.global_transform = rig.global_transform.interpolate_with(target, 1.0 - exp(-turn_speed * delta))
-```
+1. On a **Camera2D** node click **+ Add Child Node...**.
+2. In the **Search** box type "camera".
+3. Under **Camera2DComponent**, select a component to add. (Click on each one for a description or check out the Readme.)
+4. Repeat as desired.
 
 # Class Descriptions
-## Cameras <img src="/addons/dragonforge_camera/assets/textures/icons/video-camera-round.svg" width="32" alt="Cameras Icon"/>
-A list of cameras. If you want a first-person or third-person camera, attach a **CameraMount3D** node as a child of this one (you can add as many as you want.) If you want to add a static camera, you can do that too.
-### OnReady Variables
-- `available_cameras: Array[Node3D]` The cameras available to the player. Pressing the change_camera button will switch to the next camera in the list. The list is constructed when this object is first created, and is made of all the child nodes one level down that are either **Camera3D** of **CameraMount3D** nodes.
-- `active_camera_iterator` Iterator
-- `active_camera: Node3D = get_first_camera()` A reference to the currently active camera. This currently ONLY tracks cameras the player has control over (by switching). Any cutscene cameras, etc. will not be assigned to this variable.
-### Public Functions
-Note that while all these functions are available, as long as the `change_camera` action is mapped, the played can cycle through all the available cameras without any additional coding. These functions are primarily for switching between player cameras and cutscene cameras.
-- `next_camera() -> void` Activates the next camera in the list.
-- `get_first_camera() -> Node3D` Return the first Camera3D or CameraMount3D found that is a child of this node.
-- `inititalize_cameras() -> Array[Node3D]` Return a list of all Camera3D and CameraMount3D nodes that are children of this node.
-- `change_camera(camera: Node3D) -> void` Makes the passed camera the active camera.
-- `get_facing(input_vector: Vector3, character_transform_basis: Basis) -> Vector3` Returns the direction for a [CharacterBody3D] based on the passed input vector and the [member Characterbody.transform.basis]. If the active camera is 1st person, 3rd person free look or 3rd person follow, the player will point in the direction of the camera. If the camera is a 3rd person fixed, ISO or birds eye view camera, it will just reflect the actual direction the input is moving the player.
+## Camera2DLimit <img src="/addons/dragonforge_camera_2d/assets/textures/icons/limit.svg" width="32" alt="Camera 2D Limit Icon"/>
+Adding this component to a [Camera2D] restricts it to the to the used area of a [TileMapLayer] or [Rect2i].
 
-## CameraMount3D <img src="/addons/dragonforge_camera/assets/textures/icons/video-camera-mount.svg" width="32" alt="Cameras Mount 3D Icon"/>
-Intended if you want a first person or third person camera attached to the player. If you want this to be a first person camera, set `first_person` to true.
+### Usage
+1. On a **Camera2D** node click **+ Add Child Node...**.
+2. Select **Camera2DLimit** and click the **Create** button.
+3. Select the new **Camera2DLimit** node.
+4. In the **Inspector** find the **Tile Map Layer** property.
+5. Click the **Assign** button.
+6. Select the **TileMapLayer** you want to affect the **Camera2D**.
+
+### Updating the Camera2DLimit via Signal
+During gameplay, you can update the camera **Camera2DLimit** node's **Tile Map Layer**. You may want to do this because you have multiple levels of different sizes. The easiest way is just to add this code to your level's `_ready()` function. (Alternately, you would want to add this to your level switching code if the level is already loaded in memory.)
+
+```
+# Change this to point at your actual TileMapLayer
+@onready var tile_map_layer: TimeMapLayer = $TimeMapLayer
+
+func _ready() -> void:
+	Camera2DSignalBus.update_camera_boundaries.emit(tile_map_layer)
+```
+
 ### Export Variables
-- `upwards_rotation_limit: float = 0.0` How far up the camera will rotate in degrees.
-- `downwards_rotation_limit: float = 0.0` How far down the camera will rotate in degrees.
-- `first_person: bool = false` If true, camera is a first-person camera. Otherwise, third-person.
+- `@export var tile_map_layer: TileMapLayer` The [TileMapLayer] to use to restrict the atttached [Camera2D]'s limits.
+
 ### Public Functions
-- `make_current() -> void` Make the attached camera the current camera and reset the rotation.
+- `func set_limit(limit: Rect2i) -> void` Sets the attached camera's boundaries to be that of the passed [Rect2i] [param limit].
+- `set_tile_map_layer_limit(tile_map_layer: TileMapLayer) -> void` Sets the attached camera's boundaries to be that of the used tiles on the passed [param tile_map_layer]. [b]NOTE:[/b] It is recommended to use [signal Camera2DSignalBus.update_camera_boundaries] to trigger this functionality.
+
+
+## Camera2DZoom <img src="/addons/dragonforge_camera_2d/assets/textures/icons/zoom.svg" width="32" alt="Cameras Zoom Icon"/>
+Adding this component to a [Camera2D] allows the user to zoom in and out using the mouse wheel, keyboard, or controller. For pinch zoom support, see the [Camera2DPinchZoom] component..
+
+### Usage
+1. On a **Camera2D** node click **+ Add Child Node...**.
+2. Select **Camera2DZoom** and click the **Create** button.
+3. Select the new **Camera2DZoom** node.
+4. In the **Inspector** modify the zoom properties as you desire.
+
+### Constants
+- `ZOOM_IN = "zoom_in"` Remap the "zoom_in" [Action] to change the controls to zoom in.
+- `ZOOM_OUT = "zoom_out"` Remap the "zoom_out" [Action] to change the controls to zoom out.
+- `MOUSE_WHEEL_ZOOM_IN = "mouse_wheel_zoom_in"` Zoom in [Action] only used by the wheel mouse.
+- `MOUSE_WHEEL_ZOOM_OUT = "mouse_wheel_zoom_out"` Zoom out [Action] only used by the wheel mouse.
+
+### Export Variables
+- `@export_range(1.0, 5.0, 0.01) zoom_in_max := 1.0` The amount the player can zoom in. 1.0 means they cannot zoom in, and anything higher allows zooming in.
+- `@export_range(0.001, 1.0, 0.01) zoom_out_max := 0.5` The amount the player can zoom out. 1.0 means they cannot zoom out, and anything lower allows zooming out.
+- `controller_zoom_speed: float = 1.0` The speed at which the controller (and keyboard keys) adjust the zoom level.
+- `mouse_zoom_step: float = 0.2` The amount the zoom level is changed for every click of the wheel mouse.
+- `mouse_zoom_speed: float = 0.1` The amount of time it takes for the mouse wheel zoom animation to play for each zoom step.
+
+
+## Camera2DShake <img src="/addons/dragonforge_camera_2d/assets/textures/icons/shake.svg" width="32" alt="Cameras Shake Icon"/>
+Adding this component to a [Camera2D] allows the user to shake the camera and controller using the component.
+
+### Usage
+1. On a **Camera2D** node click **+ Add Child Node...**.
+2. Select **Camera2DShake** and click the **Create** button.
+3. Select the new **Camera2DShake** node.
+4. In the **Inspector** modify the shake properties as you desire.
+
+### Export Variables
+- `duration: float = 0.5` The duration in seconds for the screen shake and controller vibration.
+- `interval: float = 0.5` The duration in seconds the screen shake stops before starting again when [member is_shaking] is set to `true`.
+- `intensity: float = 1.0` The instenseity of the screen shake.
+- `@export_range(0.0, 1.0, 0.01) controller_weak_vibration: float = 0.5` The intensity of the controller vibration with the weak motors. (Typically located at the top of the controller.) A value of 0.0 is off. (Hard-coded to only shake the first connected controller.)
+- `@export_range(0.0, 1.0, 0.01)  controller_strong_vibration: float = 0.5` The intensity of the controller vibration with the strong motors. (Typically located at the bottom of the controller.) A value of 0.0 is off. (Hard-coded to only shake the first connected controller.)
+
+### Public Functions
+- `shake() -> void` Shakes the screen once and vibrates the default controller.
+- `start() -> void` Starts continuous shaking.
+- `stop() -> void` Stops continuous shaking.
+- `shake_screen() -> void` Shakes the screen for the set [member duration] at the [member intensity] set.
+- `vibrate_controller(device: int = 0) -> void` Vibrates the connected [member device] (default to the first connected device) for the set [member duration] at the intensity set by [member controller_weak_vibration] and [member controller_strong_vibration]. (Typically controlling the top and bottom vibration motors respectively.)
+
+
+## Camera2DPan <img src="/addons/dragonforge_camera_2d/assets/textures/icons/pan.svg" width="32" alt="Cameras Shake Icon"/>
+Adding this component to a [Camera2D] allows the user to pan the camera using the mouse with edge detection (moving the mouse to the edge of the screen), keyboard, controller, or touch screen.
+
+### Usage
+1. On a **Camera2D** node click **+ Add Child Node...**.
+2. Select **Camera2DPan** and click the **Create** button.
+3. Select the new **Camera2DPan** node.
+4. In the **Inspector** modify the panning properties as you desire.
+
+### Export Variables
+- `pan_speed := 60.0` The speed of keyboard and controller panning mesured in pixels.
+- `touch_pan_speed := 1.0` The speed at which the screen pans when the user drags the screen.
+- `edge_scroll_margin := 50.0` The number of pixels at the edge of the acreen that trigger edge scrolling.
+- `edge_scroll_speed := 800.0` The number of pixels panned by edge scrolling per second.
+
+
+## Camera2DPinchZoom <img src="/addons/dragonforge_camera_2d/assets/textures/icons/pinch.svg" width="32" alt="Cameras Zoom Icon"/>
+Adding this component to a [Camera2D] allows the user to zoom in and out on a touch screen using pinch zoom. For zoom support with other input methods (mouse wheel, keyboard, or controller), see the [Camera2DZoom] component.
+
+### Usage
+1. On a **Camera2D** node click **+ Add Child Node...**.
+2. Select **Camera2DPinchZoom** and click the **Create** button.
+3. Select the new **Camera2DPinchZoom** node.
+4. In the **Inspector** modify the zoom properties as you desire.
+
+### Export Variables
+- `@export_range(1.0, 5.0, 0.01) zoom_in_max := 1.0` The amount the player can zoom in. 1.0 means they cannot zoom in, and anything higher allows zooming in.
+- `@export_range(0.001, 1.0, 0.01) zoom_out_max := 0.5` The amount the player can zoom out. 1.0 means they cannot zoom out, and anything lower allows zooming out.
+
 
 # Credits
 

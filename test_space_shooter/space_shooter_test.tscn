@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b56afst0ayja2"]
+[gd_scene format=4 uid="uid://b56afst0ayja2"]
 
 [ext_resource type="Shader" uid="uid://byndinykwiyw3" path="res://test_space_shooter/assets/shaders/starfield.gdshader" id="1_xjsxi"]
 [ext_resource type="PackedScene" uid="uid://ojufbn7ryfl8" path="res://test_space_shooter/player/player.tscn" id="2_baqba"]
 [ext_resource type="Texture2D" uid="uid://dr3er3win60rs" path="res://test_space_shooter/assets/textures/background/purple.png" id="3_baqba"]
+[ext_resource type="Texture2D" uid="uid://dbc7ecp1vxifx" path="res://test_space_shooter/assets/textures/sheet.png" id="5_vhogm"]
 [ext_resource type="PackedScene" uid="uid://b70lx0bpxs2oi" path="res://test_space_shooter/asteroids/asteroid.tscn" id="9_f8b4c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vhogm"]
@@ -18,27 +19,50 @@ shader_parameter/saturation = 1.0
 shader_parameter/layers = 7.0
 shader_parameter/iterations = 8
 
-[node name="Space Shooter Test" type="Node2D"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_bq7or"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-46.5, -41.5, 0, 93, 83, 0),
+"attribute_data": PackedByteArray("erOaPgAAAAAIIQQ+AAAAAAAAAAD3kEs+AAAAALkL8z7MLjs+PyZ+P8wuOz4AAIA/u7u7PgAAgD99jc8+O792P54R4D47v3Y/LLDAPiM4Oz8ssMA+bA85P6K6HT9sDzk/eeQRP2ZmZj955BE/o6lzP7pOIT8AAIA/FbpOPwAAgD8AAIA/ghLePgAAgD/3kEs+vvdeP4vgbDs7hS4/AAAAACtDJj/IZcU8SlocP8hlxTwZYww/hTcaPj5f4z6zYiA+TTTRPqYtij1NNNE+Z6gxPQ=="),
+"format": 34393296913,
+"index_count": 72,
+"index_data": PackedByteArray("AAAZABgAFgAVABQAFAATABIAEgARABAAEAAPAA4ADgANAAwACQAIAAcABwAGAAUABAADAAIAAgABAAAAAAAYABcAFgAUABIAEgAQAA4ADgAMAAsACQAHAAUABAACAAAAEgAOAAsACgAJAAUABQAEAAAAFgASAAsACgAFAAAAFwAWAAsACwAKAAAAAAAXAAsA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("MzOTwQAAJsIAAArCAAAmwgAAOsIAAMjBAAA6wmBmBsAAAOzBmpkjQgAA7MEAACZCaGZGwQAAJkLMzAzBAAAaQpiZucAAABpCAAA4wZqZmUEAADjBAACUQczMLEEAAJRBAADQQMzMBEIAANBAAAAWQpiZQUEAACZCzMzkQQAAJkIAADpCAACwwAAAOkIAAMjBAAAKQs3MJMI0M4dBAAAmwmhmXkEAAB7CzMwkQQAAHsIAAJBAAADowWhmpsAAAOTBAAAIwZqZD8IAAAjBmpkXwg==")
+}]
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[sub_resource type="AtlasTexture" id="AtlasTexture_baagg"]
+atlas = ExtResource("5_vhogm")
+region = Rect2(425, 385, 93, 83)
+
+[node name="Space Shooter Test" type="Node2D" unique_id=421614288]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=181223178]
 repeat_size = Vector2(256, 256)
 repeat_times = 20
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=612394545]
 material = SubResource("ShaderMaterial_vhogm")
 texture = ExtResource("3_baqba")
 
-[node name="Player" parent="." node_paths=PackedStringArray("background") instance=ExtResource("2_baqba")]
+[node name="Player" parent="." unique_id=838340317 node_paths=PackedStringArray("background") instance=ExtResource("2_baqba")]
 background = NodePath("../Parallax2D/Sprite2D")
 
-[node name="Asteroid" parent="." instance=ExtResource("9_f8b4c")]
+[node name="Asteroid" parent="." unique_id=1387334369 instance=ExtResource("9_f8b4c")]
 position = Vector2(-245, -212)
 
-[node name="Asteroid2" parent="." instance=ExtResource("9_f8b4c")]
+[node name="Asteroid2" parent="." unique_id=1542982959 instance=ExtResource("9_f8b4c")]
 position = Vector2(413, -260)
 
-[node name="Asteroid3" parent="." instance=ExtResource("9_f8b4c")]
+[node name="Asteroid3" parent="." unique_id=1683500789 instance=ExtResource("9_f8b4c")]
 position = Vector2(-344, 207)
 
-[node name="Asteroid4" parent="." instance=ExtResource("9_f8b4c")]
+[node name="Asteroid4" parent="." unique_id=304925901 instance=ExtResource("9_f8b4c")]
 position = Vector2(352, 195)
+
+[node name="Sprite2D" type="MeshInstance2D" parent="." unique_id=1802330230]
+position = Vector2(-116, 3)
+mesh = SubResource("ArrayMesh_bq7or")
+texture = SubResource("AtlasTexture_baagg")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://dhtfcpqevtin1"]
+[gd_scene format=4 uid="uid://dhtfcpqevtin1"]
 
 [ext_resource type="Script" uid="uid://bn10amn6x1lww" path="res://test_platformer/character_body_2d.gd" id="1_0lyw7"]
 [ext_resource type="Texture2D" uid="uid://bmeoo5lq3p4fs" path="res://test_platformer/assets/textures/player/p1_duck.png" id="1_khmlf"]
@@ -19,11 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://dlvin0vdo0rxf" path="res://test_platformer/assets/textures/player/p1_walk/p1_walk10.png" id="15_4upib"]
 [ext_resource type="Texture2D" uid="uid://cnhmfmqs3k2md" path="res://test_platformer/assets/textures/player/p1_walk/p1_walk11.png" id="16_dyhds"]
 [ext_resource type="Texture2D" uid="uid://y0m2m7txqfxi" path="res://test_platformer/assets/textures/tiles_sheet.png" id="18_edmaa"]
-[ext_resource type="Script" uid="uid://c3kp1j2jf8xw5" path="res://addons/dragonforge_camera_2d/camera_2d_pinch_zoom.gd" id="20_7ivef"]
 [ext_resource type="Script" uid="uid://dsly5ety6golv" path="res://addons/dragonforge_camera_2d/camera_2d_zoom.gd" id="20_c1onv"]
 [ext_resource type="Script" uid="uid://c6isp3swx5c53" path="res://addons/dragonforge_camera_2d/camera_2d_limit.gd" id="21_7ivef"]
+[ext_resource type="Script" uid="uid://o4qfu7xthmjv" path="res://addons/dragonforge_camera_2d/camera_2d_pan.gd" id="22_280au"]
 [ext_resource type="Script" uid="uid://17e3pstyr65d" path="res://addons/dragonforge_camera_2d/camera_2d_shake.gd" id="22_rg8iv"]
-[ext_resource type="Script" uid="uid://o4qfu7xthmjv" path="res://addons/dragonforge_camera_2d/camera_2d_pan.gd" id="23_e3n0w"]
+[ext_resource type="Script" uid="uid://c3kp1j2jf8xw5" path="res://addons/dragonforge_camera_2d/camera_2d_pinch_zoom.gd" id="23_e3n0w"]
 [ext_resource type="Script" uid="uid://3ihk7ka0ynai" path="res://test_platformer/water_hazard.gd" id="24_280au"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_khmlf"]
@@ -411,29 +411,29 @@ sources/1 = SubResource("TileSetAtlasSource_ugneh")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rg8iv"]
 size = Vector2(350, 35)
 
-[node name="Platformer Test" type="Node2D"]
+[node name="Platformer Test" type="Node2D" unique_id=1847842612]
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=917912955]
 repeat_size = Vector2(256, 256)
 repeat_times = 15
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=665784486]
 texture = ExtResource("1_ugneh")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1687499985]
 collision_layer = 3
 floor_snap_length = 10.0
 script = ExtResource("1_0lyw7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=668603771]
 position = Vector2(2.5, 0)
 shape = SubResource("CapsuleShape2D_khmlf")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=552669062]
 sprite_frames = SubResource("SpriteFrames_tiasu")
 animation = &"hurt"
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=522871493]
 limit_left = -700
 limit_top = -700
 limit_right = 1050
@@ -445,39 +445,43 @@ drag_right_margin = 0.1
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="Camera2DZoom" type="Node" parent="CharacterBody2D/Camera2D"]
-script = ExtResource("20_c1onv")
-metadata/_custom_type_script = "uid://dsly5ety6golv"
-
-[node name="Camera2DPinchZoom" type="Node" parent="CharacterBody2D/Camera2D"]
-script = ExtResource("20_7ivef")
-metadata/_custom_type_script = "uid://c3kp1j2jf8xw5"
-
-[node name="Camera2DLimit" type="Node" parent="CharacterBody2D/Camera2D" node_paths=PackedStringArray("tile_map_layer")]
+[node name="Camera2DLimit" type="Node" parent="CharacterBody2D/Camera2D" unique_id=750071472 node_paths=PackedStringArray("tile_map_layer")]
 script = ExtResource("21_7ivef")
 tile_map_layer = NodePath("../../../TileMapLayer")
 metadata/_custom_type_script = "uid://c6isp3swx5c53"
 
-[node name="Camera2DShake" type="Node" parent="CharacterBody2D/Camera2D"]
+[node name="Camera2DZoom" type="Node" parent="CharacterBody2D/Camera2D" unique_id=18062715]
+script = ExtResource("20_c1onv")
+metadata/_custom_type_script = "uid://dsly5ety6golv"
+
+[node name="Camera2DShake" type="Node" parent="CharacterBody2D/Camera2D" unique_id=1427066114]
 script = ExtResource("22_rg8iv")
 interval = 1.0
 metadata/_custom_type_script = "uid://17e3pstyr65d"
 
-[node name="Camera2DPan" type="Node" parent="CharacterBody2D/Camera2D"]
-script = ExtResource("23_e3n0w")
+[node name="Camera2DPan" type="Node" parent="CharacterBody2D/Camera2D" unique_id=819538593]
+script = ExtResource("22_280au")
+pan_speed = 40.0
+touch_pan_speed = null
+edge_scroll_margin = null
+edge_scroll_speed = null
 metadata/_custom_type_script = "uid://o4qfu7xthmjv"
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="Camera2DPinchZoom" type="Node" parent="CharacterBody2D/Camera2D" unique_id=709333129]
+script = ExtResource("23_e3n0w")
+metadata/_custom_type_script = "uid://c3kp1j2jf8xw5"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1475762429]
 tile_map_data = PackedByteArray("AAD+/wEAAQAGAAkAAAD//wEAAQAGAAkAAAAAAAEAAQAGAAkAAAABAAEAAQAGAAgAAAD9/wEAAQAGAAkAAAADAP//AQAGAAkAAAAEAP//AQAHAAkAAAACAP//AQAHAAsAAAD9/wAAAQAGAAYAAAD7////AQAHAAcAAAD5//7/AQAHAAcAAAAGAPz/AQAHAAMAAAAHAPz/AQAHAAIAAAAIAPz/AQAIAAAAAAAHAPv/AQAHAAMAAAAIAPr/AQAHAAMAAAAJAPz/AQAIAAAAAAAIAPv/AQAHAAIAAAAJAPr/AQAGAAkAAAALAPr/AQAGAAgAAAAKAPr/AQAGAAkAAAAJAPv/AQAIAAAAAAAKAPv/AQAIAAAAAAAKAPz/AQAIAAAAAAD2/wQAAQAGAAoAAAD3/wQAAQAGAAkAAAD4/wQAAQAGAAkAAAD5/wQAAQAGAAkAAAD6/wQAAQAGAAgAAAD7/wQAAQAGAAoAAAD8/wQAAQAGAAkAAAD9/wQAAQAGAAkAAAD+/wQAAQAGAAkAAAD//wQAAQAGAAgAAAAAAAQAAQAGAAoAAAABAAQAAQAGAAkAAAACAAQAAQAGAAkAAAADAAQAAQAGAAkAAAAEAAQAAQAGAAgAAAAFAAQAAQAGAAoAAAAGAAQAAQAGAAkAAAAHAAQAAQAGAAkAAAAIAAQAAQAGAAkAAAAJAAQAAQAGAAgAAAAKAAQAAQAGAAoAAAALAAQAAQAGAAkAAAAMAAQAAQAGAAkAAAANAAQAAQAGAAkAAAAOAAQAAQAGAAgAAAD2/wMAAQAJAAIAAAD2/wIAAQAJAAIAAAD2/wEAAQAJAAIAAAD2/wAAAQAJAAIAAAD2////AQAJAAIAAAD2//7/AQAJAAIAAAD2//3/AQAJAAIAAAD2//z/AQAJAAIAAAD2//v/AQAJAAIAAAD2//r/AQAJAAIAAAD2//n/AQAJAAIAAAAOAAMAAQAJAAIAAAAOAAIAAQAJAAIAAAAOAAEAAQAJAAIAAAAOAAAAAQAJAAIAAAAOAP//AQAJAAIAAAAOAP7/AQAJAAIAAAAOAP3/AQAJAAIAAAAOAPz/AQAJAAIAAAAOAPv/AQAJAAIAAAAOAPr/AQAJAAIAAAAOAPn/AQAJAAIAAAAOAPj/AQAJAAIAAAAOAPf/AQAJAAIAAAAOAPb/AQAJAAIAAAD2//b/AQAJAAIAAAD2//f/AQAJAAIAAAD2//j/AQAJAAIAAAD3//b/AQAHAAYAAAD4//b/AQAHAAYAAAD5//b/AQAHAAYAAAD6//b/AQAHAAYAAAD7//b/AQAHAAYAAAD8//b/AQAHAAYAAAD9//b/AQAHAAYAAAD+//b/AQAHAAYAAAD///b/AQAHAAYAAAAAAPb/AQAHAAYAAAABAPb/AQAHAAYAAAACAPb/AQAHAAYAAAADAPb/AQAHAAYAAAAEAPb/AQAHAAYAAAAFAPb/AQAHAAYAAAAGAPb/AQAHAAYAAAAHAPb/AQAHAAYAAAAIAPb/AQAHAAYAAAAJAPb/AQAHAAYAAAAKAPb/AQAHAAYAAAALAPb/AQAHAAYAAAAMAPb/AQAHAAYAAAANAPb/AQAHAAYAAAD8/wEAAQAHAAoAAAD6/wIAAQAHAAcAAAD4/wMAAQAGAAYAAAABAAAAAQAGAAYAAAD8//3/AQAHAAcAAAD9//z/AQAIAAEAAAD+//v/AQAIAAEAAAAHAAMAAQAFAAoAAAAIAAMAAQAFAAoAAAAJAAMAAQAFAAoAAAAEAAMAAQAIAAEAAAAKAAMAAQAIAAEAAAAAAP3/AQAJAAEAAAACAPz/AQAJAAEAAAAEAPv/AQAJAAEAAAD9/wIAAQAIAAAAAAD+/wIAAQAIAAAAAAD//wIAAQAIAAAAAAAAAAIAAQAIAAAAAAAGAAMAAQAFAAoAAAAFAAMAAQAFAAoAAAA=")
 tile_set = SubResource("TileSet_ugneh")
 
-[node name="WaterHazard" type="Area2D" parent="."]
+[node name="WaterHazard" type="Area2D" parent="." unique_id=622612879]
 position = Vector2(525, 261)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("24_280au")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterHazard"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterHazard" unique_id=1399851423]
 shape = SubResource("RectangleShape2D_rg8iv")
 debug_color = Color(0.98039216, 0, 0, 0.41960785)
 

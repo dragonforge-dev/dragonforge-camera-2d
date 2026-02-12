@@ -1,5 +1,7 @@
 @icon("res://addons/dragonforge_camera_2d/assets/textures/icons/shake.svg")
 @tool
+## Adding this component to a [Camera2D] allows the user to shake the camera
+## and controller using the component.
 class_name Camera2DShake extends Camera2DComponent
 
 ## The duration in seconds for the screen shake and controller vibration.
@@ -10,14 +12,14 @@ class_name Camera2DShake extends Camera2DComponent
 ## The instenseity of the screen shake.
 @export var intensity: float = 1.0
 ## The intensity of the controller vibration with the weak motors.
-## A value of 0.0 is off.
-## Hard-coded to only shake the first connected controller.
 ## (Typically located at the top of the controller.)
+## A value of 0.0 is off.
+## (Hard-coded to only shake the first connected controller.)
 @export_range(0.0, 1.0, 0.01) var controller_weak_vibration: float = 0.5
 ## The intensity of the controller vibration with the strong motors.
-## A value of 0.0 is off.
-## Hard-coded to only shake the first connected controller.
 ## (Typically located at the bottom of the controller.)
+## A value of 0.0 is off.
+## (Hard-coded to only shake the first connected controller.)
 @export_range(0.0, 1.0, 0.01) var controller_strong_vibration: float = 0.5
 
 var _is_shaking: bool = false

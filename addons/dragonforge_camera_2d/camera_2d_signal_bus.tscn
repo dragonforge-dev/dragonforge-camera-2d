@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dtx1jkwfytkik"]
+
+[ext_resource type="Script" uid="uid://6bj51mxoubib" path="res://addons/dragonforge_camera_2d/camera_2d_signal_bus.gd" id="1_l4kew"]
+
+[node name="Camera2DSignalBus" type="Node" unique_id=2007864431]
+script = ExtResource("1_l4kew")
