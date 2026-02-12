@@ -1,7 +1,7 @@
 [![Static Badge](https://img.shields.io/badge/Godot%20Engine-4.6.stable-blue?style=plastic&logo=godotengine)](https://godotengine.org/)
-[![License](https://img.shields.io/github/license/dragonforge-dev/dragonforge-camera-3d?logo=mit)](https://github.com/dragonforge-dev/dragonforge-camera-3d/blob/main/LICENSE)
-[![GitHub release badge](https://badgen.net/github/release/dragonforge-dev/dragonforge-camera-3d/latest)](https://github.com/dragonforge-dev/dragonforge-camera-3d/releases/latest)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dragonforge-dev/dragonforge-camera-3d)](https://img.shields.io/github/languages/code-size/dragonforge-dev/dragonforge-camera-3d)
+[![License](https://img.shields.io/github/license/dragonforge-dev/dragonforge-camera-2d?logo=mit)](https://github.com/dragonforge-dev/dragonforge-camera-3d/blob/main/LICENSE)
+[![GitHub release badge](https://badgen.net/github/release/dragonforge-dev/dragonforge-camera-2d/latest)](https://github.com/dragonforge-dev/dragonforge-camera-3d/releases/latest)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dragonforge-dev/dragonforge-camera-2d)](https://img.shields.io/github/languages/code-size/dragonforge-dev/dragonforge-camera-3d)
 
 # Dragonforge Camera 2D <img src="/assets/textures/icons/readme_icon.svg" width="32" alt="Camera 2D Project Icon"/>
 Godot Camera2D components to add basic features to cameras.
