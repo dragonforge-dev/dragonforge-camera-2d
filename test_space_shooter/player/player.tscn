@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://ojufbn7ryfl8"]
+[gd_scene format=3 uid="uid://ojufbn7ryfl8"]
 
 [ext_resource type="Script" uid="uid://bl6ymk0uwd1t6" path="res://test_space_shooter/player/player.gd" id="1_14sqo"]
 [ext_resource type="Texture2D" uid="uid://c6y763kynv6xg" path="res://test_space_shooter/assets/textures/effects/shield1.png" id="2_g6vla"]
@@ -108,50 +108,50 @@ texture_margin_top = 15.0
 texture_margin_right = 15.0
 texture_margin_bottom = 15.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=2138943767]
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_14sqo")
 starting_missiles = 10
 max_health = 150.0
 
-[node name="Shield" type="Sprite2D" parent="."]
+[node name="Shield" type="Sprite2D" parent="." unique_id=920426476]
 modulate = Color(0.21176471, 0.73333335, 0.9607843, 0)
 texture = ExtResource("2_g6vla")
 
-[node name="Thrusters" type="AnimatedSprite2D" parent="."]
+[node name="Thrusters" type="AnimatedSprite2D" parent="." unique_id=2002715948]
 position = Vector2(0, 53)
 sprite_frames = SubResource("SpriteFrames_baagg")
 animation = &"thrust"
 autoplay = "thrust"
 frame_progress = 0.69806427
 
-[node name="Ship" type="Sprite2D" parent="."]
+[node name="Ship" type="Sprite2D" parent="." unique_id=750147531]
 texture = ExtResource("5_q81nm")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=869845922]
 visible = false
 polygon = PackedVector2Array(-49, -6, -37, 1, -12, -12, -8, -37, 7, -37, 11, -12, 35, 2, 49, -6, 45, 24, 13, 27, 7, 37, -7, 37, -14, 26, -46, 24)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=981839708]
 
-[node name="Shield Sound" type="AudioStreamPlayer" parent="."]
+[node name="Shield Sound" type="AudioStreamPlayer" parent="." unique_id=1237765923]
 stream = ExtResource("7_ffw6q")
 
-[node name="Thruster Sound" type="AudioStreamPlayer" parent="."]
+[node name="Thruster Sound" type="AudioStreamPlayer" parent="." unique_id=934551988]
 stream = ExtResource("6_2v2lw")
 autoplay = true
 
-[node name="Fire Laser Sound" type="AudioStreamPlayer" parent="."]
+[node name="Fire Laser Sound" type="AudioStreamPlayer" parent="." unique_id=500895057]
 stream = ExtResource("7_0dqur")
 
-[node name="Fire Missile Sound" type="AudioStreamPlayer" parent="."]
+[node name="Fire Missile Sound" type="AudioStreamPlayer" parent="." unique_id=1203080877]
 stream = ExtResource("10_4hnra")
 
-[node name="Gun Port" type="Marker2D" parent="."]
+[node name="Gun Port" type="Marker2D" parent="." unique_id=1009778939]
 position = Vector2(0, -37)
 
-[node name="Smoke" type="GPUParticles2D" parent="."]
+[node name="Smoke" type="GPUParticles2D" parent="." unique_id=1353703953]
 visible = false
 position = Vector2(0, 44)
 amount = 30
@@ -159,18 +159,18 @@ texture = ExtResource("8_u3ua4")
 explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_xhf4m")
 
-[node name="Radar" type="Area2D" parent="."]
+[node name="Radar" type="Area2D" parent="." unique_id=1363345777]
 collision_layer = 0
 collision_mask = 31
 script = ExtResource("12_7cdwr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radar" unique_id=1030312221]
 shape = SubResource("RectangleShape2D_ohqvr")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=751857995]
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=1995314995]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -181,112 +181,112 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Shield HUD" type="PanelContainer" parent="HUD/MarginContainer"]
+[node name="Shield HUD" type="PanelContainer" parent="HUD/MarginContainer" unique_id=1118957836]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_wvn0b")
 script = ExtResource("12_0vlsu")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/Shield HUD"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/Shield HUD" unique_id=1326936301]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HUD/MarginContainer/Shield HUD/HBoxContainer"]
+[node name="Label" type="Label" parent="HUD/MarginContainer/Shield HUD/HBoxContainer" unique_id=813089312]
 layout_mode = 2
 text = "Shields"
 label_settings = SubResource("LabelSettings_0vlsu")
 
-[node name="Shield Display" type="HBoxContainer" parent="HUD/MarginContainer/Shield HUD/HBoxContainer"]
+[node name="Shield Display" type="HBoxContainer" parent="HUD/MarginContainer/Shield HUD/HBoxContainer" unique_id=1243847818]
 layout_mode = 2
 
-[node name="Shield" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
-layout_mode = 2
-texture = ExtResource("13_ffw6q")
-
-[node name="Shield2" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+[node name="Shield" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=1730790953]
 layout_mode = 2
 texture = ExtResource("13_ffw6q")
 
-[node name="Shield3" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+[node name="Shield2" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=1361207291]
 layout_mode = 2
 texture = ExtResource("13_ffw6q")
 
-[node name="Shield4" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+[node name="Shield3" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=804923378]
 layout_mode = 2
 texture = ExtResource("13_ffw6q")
 
-[node name="Shield5" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+[node name="Shield4" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=1154675296]
 layout_mode = 2
 texture = ExtResource("13_ffw6q")
 
-[node name="Shield6" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+[node name="Shield5" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=436125835]
 layout_mode = 2
 texture = ExtResource("13_ffw6q")
 
-[node name="Shield7" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+[node name="Shield6" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=2036761264]
 layout_mode = 2
 texture = ExtResource("13_ffw6q")
 
-[node name="Shield8" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+[node name="Shield7" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=888450827]
 layout_mode = 2
 texture = ExtResource("13_ffw6q")
 
-[node name="Shield9" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+[node name="Shield8" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=1079445495]
 layout_mode = 2
 texture = ExtResource("13_ffw6q")
 
-[node name="Shield10" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display"]
+[node name="Shield9" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=629227303]
 layout_mode = 2
 texture = ExtResource("13_ffw6q")
 
-[node name="Shield Charge Sound" type="AudioStreamPlayer" parent="HUD/MarginContainer/Shield HUD"]
+[node name="Shield10" type="TextureRect" parent="HUD/MarginContainer/Shield HUD/HBoxContainer/Shield Display" unique_id=1095286341]
+layout_mode = 2
+texture = ExtResource("13_ffw6q")
+
+[node name="Shield Charge Sound" type="AudioStreamPlayer" parent="HUD/MarginContainer/Shield HUD" unique_id=1515140999]
 stream = ExtResource("16_p2x11")
 
-[node name="Missile HUD" type="MarginContainer" parent="HUD/MarginContainer"]
+[node name="Missile HUD" type="MarginContainer" parent="HUD/MarginContainer" unique_id=1828749312]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 script = ExtResource("17_4hnra")
 
-[node name="Panel" type="Panel" parent="HUD/MarginContainer/Missile HUD"]
+[node name="Panel" type="Panel" parent="HUD/MarginContainer/Missile HUD" unique_id=594429212]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_tn6fi")
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD/MarginContainer/Missile HUD"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/MarginContainer/Missile HUD" unique_id=106808691]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer/Missile HUD/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer/Missile HUD/MarginContainer" unique_id=214637498]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="HUD/MarginContainer/Missile HUD/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="HUD/MarginContainer/Missile HUD/MarginContainer/VBoxContainer" unique_id=348788278]
 layout_mode = 2
 text = "Missiles"
 label_settings = SubResource("LabelSettings_0vlsu")
 horizontal_alignment = 1
 
-[node name="Missile Display" type="GridContainer" parent="HUD/MarginContainer/Missile HUD/MarginContainer/VBoxContainer"]
+[node name="Missile Display" type="GridContainer" parent="HUD/MarginContainer/Missile HUD/MarginContainer/VBoxContainer" unique_id=1321386866]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 10
 
-[node name="Add Missile Sound" type="AudioStreamPlayer" parent="HUD/MarginContainer/Missile HUD"]
+[node name="Add Missile Sound" type="AudioStreamPlayer" parent="HUD/MarginContainer/Missile HUD" unique_id=1071634216]
 stream = ExtResource("19_4hnra")
 
-[node name="Terminal" type="PanelContainer" parent="HUD/MarginContainer"]
+[node name="Terminal" type="PanelContainer" parent="HUD/MarginContainer" unique_id=1792079811]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxTexture_c684j")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer/Terminal"]
+[node name="HBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer/Terminal" unique_id=2003671958]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HUD/MarginContainer/Terminal/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HUD/MarginContainer/Terminal/HBoxContainer" unique_id=1469411673]
 custom_minimum_size = Vector2(400, 27)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0.9882353, 0, 1)
@@ -295,17 +295,17 @@ theme_override_fonts/normal_font = ExtResource("21_uvky2")
 bbcode_enabled = true
 text = "[pulse freq=1.0 color=#ffffff40]Incoming Message...[/pulse]"
 
-[node name="Radar HUD" type="MarginContainer" parent="HUD/MarginContainer"]
+[node name="Radar HUD" type="MarginContainer" parent="HUD/MarginContainer" unique_id=1479244337]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="Panel" type="Panel" parent="HUD/MarginContainer/Radar HUD"]
+[node name="Panel" type="Panel" parent="HUD/MarginContainer/Radar HUD" unique_id=208839685]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_5c3wk")
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD/MarginContainer/Radar HUD" node_paths=PackedStringArray("radar")]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/MarginContainer/Radar HUD" unique_id=1675171342 node_paths=PackedStringArray("radar")]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
@@ -314,7 +314,7 @@ theme_override_constants/margin_bottom = 15
 script = ExtResource("23_ohqvr")
 radar = NodePath("../../../../Radar")
 
-[node name="MarginContainer2" type="MarginContainer" parent="HUD/MarginContainer/Radar HUD" node_paths=PackedStringArray("radar")]
+[node name="MarginContainer2" type="MarginContainer" parent="HUD/MarginContainer/Radar HUD" unique_id=1707168972 node_paths=PackedStringArray("radar")]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15

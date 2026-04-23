@@ -14,7 +14,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Dragonforge Camera 2D"
+config/name="Dragonforge Camera 2D v0.1.1"
+config/version="0.1.1"
 run/main_scene="uid://dvgfrrr61ahtn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://c60wl35dvjcg3"

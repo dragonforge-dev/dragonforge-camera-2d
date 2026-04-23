@@ -1,4 +1,4 @@
-[![Static Badge](https://img.shields.io/badge/Godot%20Engine-4.6.stable-blue?style=plastic&logo=godotengine)](https://godotengine.org/)
+[![Static Badge](https://img.shields.io/badge/Godot%20Engine-4.6.2.stable-blue?style=plastic&logo=godotengine)](https://godotengine.org/)
 [![License](https://img.shields.io/github/license/dragonforge-dev/dragonforge-camera-2d?logo=mit)](https://github.com/dragonforge-dev/dragonforge-camera-3d/blob/main/LICENSE)
 [![GitHub release badge](https://badgen.net/github/release/dragonforge-dev/dragonforge-camera-2d/latest)](https://github.com/dragonforge-dev/dragonforge-camera-3d/releases/latest)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dragonforge-dev/dragonforge-camera-2d)](https://img.shields.io/github/languages/code-size/dragonforge-dev/dragonforge-camera-3d)
@@ -11,8 +11,8 @@ Godot Camera2D components to add basic features to cameras.
 - **Camera2DPan** - Allow a player to pan a **Camera2D** using the mouse, keyboard, controller, or touch screen.
 - **Camera2DPinchZoom** - Allow a player to zoom a **Camera2D** using pinch zoom on a touch screen.
 
-# Version 0.1
-For use with **Godot 4.6.stable** and later.
+# Version 0.1.1
+For use with **Godot 4.6.2.stable** and later.
 
 # Installation Instructions
 1. Copy the `dragonforge_camera_2d` folder from the `addons` folder into your project's `addons` folder.
