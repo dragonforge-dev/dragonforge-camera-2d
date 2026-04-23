@@ -64,7 +64,7 @@ func _ready() -> void:
 - `set_tile_map_layer_limit(tile_map_layer: TileMapLayer) -> void` Sets the attached camera's boundaries to be that of the used tiles on the passed [param tile_map_layer]. [b]NOTE:[/b] It is recommended to use [signal Camera2DSignalBus.update_camera_boundaries] to trigger this functionality.
 
 
-## Camera2DZoom <img src="/addons/dragonforge_camera_2d/assets/textures/icons/zoom.svg" width="32" alt="Cameras Zoom Icon"/>
+## Camera2DZoom <img src="/addons/dragonforge_camera_2d/assets/textures/icons/zoom.svg" width="32" alt="Camera Zoom Icon"/>
 Adding this component to a [Camera2D] allows the user to zoom in and out using the mouse wheel, keyboard, or controller. For pinch zoom support, see the [Camera2DPinchZoom] component..
 
 ### Usage
